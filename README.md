@@ -12,5 +12,5 @@ https://www.codecademy.com/resources/blog/python-code-challenges-for-beginners/
 
 
 Depois:
-Xadrez
+Xadrez / 
 Automatização de Excel
