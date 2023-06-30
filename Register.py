@@ -11,7 +11,7 @@ MainFrame = tk.Frame(root)
 MainFrame.place(relx = 0.5, rely = 0.5, anchor= tk.CENTER)
 
 
-def Warning(WarningType):
+def Warning(WarningType): #Change the button's grid placement for text with warning
     print("Calling Warning with error: " + str(WarningType))
     WarningLabel.configure(text = str(WarningType))
     WarningLabel.grid(row=4, columnspan=2, sticky= tk.N)
@@ -25,56 +25,55 @@ def Warning(WarningType):
 def ValidInfo(Credentials):
     RejecInputs = re.compile("[@_!#$%^&*()<>?/\|}{~:]")
     global ValidCred
-    ValidCred = None
+    ValidCred = True
     
     # Username
-    # Username rejects inputs (special characters and emtpy field)
-    if RejecInputs.search(Credentials["UserName"]) or not "" in str(Credentials["UserName"]):
+    if RejecInputs.search(Credentials["UserName"]) or not "" in str(Credentials["UserName"]): #special characters and emtpy field
         Warning("Invalid username, don't use special characters") # Email
         ValidCred = False
         return
-    # 4 Minimum characters
-    elif len(str(Credentials["UserName"])) < 4:
+
+    elif len(str(Credentials["UserName"])) < 4: # 4 Minimum characters
         Warning("Username needs to be at least 4 characters")
         ValidCred = False
         return
-    elif Credentials["UserName"] == "Admin":
-        #
-        #Do something here
-        #
+    elif Credentials["UserName"] == "Admin": # Checks for admin
         return
-    else:
-        ValidCred = True
-    
+
     #  Email
-    #  Needs to have a "@"and not be empty
-    if "@" not in Credentials["Email"] or not "" in Credentials["Email"]:
+    elif "@" not in Credentials["Email"] or not "" in Credentials["Email"]: #  Needs to have a "@"and not be empty
         Warning("Invalid Email")
         ValidCred = False
         return
     elif len(str(Credentials["Email"])) < 3:
         Warning("Email needs to have at least 3 characters")
         ValidCred = False
+
+    #Password
+    if RejecInputs.search(Credentials["UserName"]) or not "" in str(Credentials["UserName"]): #special characters and emtpy field
+        Warning("Invalid username, don't use special characters") # Email
+        ValidCred = False
+        return
+    elif len(str(Credentials["UserName"])) < 4: # 4 Minimum characters
+        Warning("Username needs to be at least 4 characters")
+        ValidCred = False
+        return
     else:
         ValidCred = True
 
 
-    
-    # Check exists
+    # Check for existing credentials
     File = open('Credentials.txt', 'r')
     Lines = File.readlines()
-    count = 0
     for line in Lines:
         # Turns the string into Dictionary so it can be used to check
         DataBase = eval(line)
-
         if DataBase["UserName"] != Credentials["UserName"]:
             ValidCred = True
         else:
             Warning("Username already being used")
             ValidCred = False
             return
-        
         if DataBase["Email"] != Credentials["Email"]:
             ValidCred = True
         else:
@@ -90,20 +89,24 @@ def SaveCredentials():
     Credentials = {"UserName": UserNameInput.get(), "Email": EmailInput.get(), "Password": PasswordInput.get()}
     print("Calling ValidInfo with: " + str(Credentials))
     
-    try: # If "database" file already exists, standart check
-        ValidInfo(Credentials)# Verificar se credenciais são válidas (letras e simbolos ou ja existente na "base de dados")
-    except: # If file doesn't exist create one
-        file = open(r'Credentials.txt', 'w')
+    try:# If file does not exist
+        ValidInfo(Credentials)
+    except:
+        file = open(r'Credentials.txt', 'w') # Creates file
+        file.write(str(Credentials) +  "\n")
         file.close
+        return # Here should be going to the main window not return
 
-    if ValidCred == True:
-        file = open(r'Credentials.txt', 'a') #Abrir ficheiro
-        file.write(str(Credentials) +  "\n") # "Append" no ficheiro
+    if ValidCred == True:# If file exists
+        file = open(r'Credentials.txt', 'a')
+        file.write(str(Credentials) +  "\n")
         file.close
-        return
+        return # Here should be going to the main window not return
 
 
 
+
+# Main Register Window
 def RegisterSection():
     TitleLabel = ttk.Label(MainFrame, text = "Register Window", font = 25)  # Title
     TitleLabel.grid(row = 0, columnspan= 2)                                 #
