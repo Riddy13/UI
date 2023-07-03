@@ -41,7 +41,7 @@ def ValidInfo(Credentials):
         return
 
     #  Email
-    elif "@" not in Credentials["Email"] or not "" in Credentials["Email"]: #  Needs to have a "@"and not be empty
+    if "@" not in Credentials["Email"] or not "" in Credentials["Email"]: #  Needs to have a "@"and not be empty
         Warning("Invalid Email")
         ValidCred = False
         return
@@ -50,7 +50,7 @@ def ValidInfo(Credentials):
         ValidCred = False
 
     #Password
-    if RejecInputs.search(Credentials["UserName"]) or not "" in str(Credentials["UserName"]): #special characters and emtpy field
+    if RejecInputs.search(Credentials["Password"]) or "" in str(Credentials["UserName"]): #special characters and emtpy field
         Warning("Invalid username, don't use special characters") # Email
         ValidCred = False
         return
@@ -58,8 +58,7 @@ def ValidInfo(Credentials):
         Warning("Username needs to be at least 4 characters")
         ValidCred = False
         return
-    else:
-        ValidCred = True
+
 
 
     # Check for existing credentials
