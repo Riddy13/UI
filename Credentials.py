@@ -53,52 +53,41 @@ def ValidInfo(Credentials): # Validating info (parameters and not already existi
 ##########################
 
     # Check for existing credentials
-    print("Checking for existing stuff")
     File = open(r'Credentials.txt', 'r')
-    
     if File.read(): # If has content
+        File.seek(0)
         Lines = File.readlines()
         for line in Lines:
-            print("Checking lines")
             # Turns the string into Dictionary so it can be used to check
             DataBase = eval(line)
-            print("Checking username")
-            if DataBase["UserName"] != Credentials["UserName"]:
-                pass
-            else:
+            if DataBase["UserName"] == Credentials["UserName"]:
                 print("Calling warning")
                 return("Username already being used")
-            print("Checking email")
-            if DataBase["Email"] != Credentials["Email"]:
-                print("Done checking info")
-                return True #Change this if more checks are done
-            else:
+            if DataBase["Email"] == Credentials["Email"]:
                 print("Calling warning")
-                return("Email already being used")
+                return("Email already being used") #Change this if more checks are done
+            return True
     else:
-        print("Done checking info")
-        return True
+        return("File not found")
 
 
 
 def SaveCredentials(Credentials):
-    print("Calling ValidInfo with: " + str(Credentials))
-    try:# If file does not exist
+    # Checks for file, if doesn't exist create one
+    try:
         file = open(r'Credentials.txt', 'a')
         file.close
     except:
         print("Creating the txt file")
-        file = open(r'Credentials.txt', 'w') # Creates file
+        file = open(r'Credentials.txt', 'w')
         file.close
         return True
-    print("Done checking the file")
-
-    print("Checking info")
+    
+    # Checks the credentails and then appends them to the txt
+    print("Calling ValidInfo with: " + str(Credentials))
     Info = ValidInfo(Credentials)
     if Info == True:# If file exists and True
         print("Validated info")
-        file = open(r'Credentials.txt', 'w')
-        file.close
         file = open(r'Credentials.txt', 'a')
         file.write(str(Credentials) +  "\n")
         file.close

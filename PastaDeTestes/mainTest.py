@@ -1,6 +1,3 @@
-File = open(r'./Credentials.txt', 'r')
+zfile = open("test.txt", "r")
 
-if File.read():
-    print(True)
-else:
-    print(False)
+file.write(str({'Remember': False, 'UserName': '', 'Email': '', 'Password': ''}))
