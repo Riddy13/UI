@@ -2,17 +2,8 @@ import tkinter as tk            # Interface
 from tkinter import ttk
 from Credentials import SaveCredentials
 from Warning import AddWarning
+from WindowChange import ChangeWindows
 
-
-
-
-def RegisterToMain():
-    Credentials = {"UserName": UserNameInput.get(), "Email": EmailInput.get(), "Password": PasswordInput.get()}
-    Check = SaveCredentials(Credentials) # Checks and saves credentials
-    if Check == True:
-        pass # Go to Main
-    elif isinstance(Check, str): # if it has a warning on incorrect data:
-        AddWarning(Check, WarningLabel, Register, ChangeToLogIn)        
 
 
 # Main Register Window
@@ -39,7 +30,7 @@ def RegisterSection(Frame):
     PasswordLabel.grid(row = 3, column=0, sticky = tk.W, pady=2, padx=2)
 
     global Register
-    Register = ttk.Button(Frame, text="Register", width=20, command=RegisterToMain)
+    Register = ttk.Button(Frame, text="Register", width=20, command=ChangeWindows(Frame, "Login"))
     Register.grid(row=4, columnspan=2, sticky = tk.W, padx=2, pady=2)
 
     global ChangeToLogIn
