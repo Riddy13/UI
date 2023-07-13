@@ -2,8 +2,20 @@ import tkinter as tk            # Interface
 from tkinter import ttk
 from Credentials import SaveCredentials
 from Warning import AddWarning
+
 from WindowChange import ChangeWindows
 
+
+# Checks and then saves the credentials 
+def RegisterToMain():
+    Credentials = {"UserName": UserNameInput.get(), "Email": EmailInput.get(), "Password": PasswordInput.get()}
+    Check = SaveCredentials(Credentials)
+    if Check == True:
+        pass
+
+    #The function below needs the error name, the warning widget label, and the widgets buttons
+    elif isinstance(Check, str):
+        AddWarning(Check, WarningLabel, Register, ChangeToLogIn)
 
 
 # Main Register Window
@@ -40,4 +52,3 @@ def RegisterSection(Frame):
     global WarningLabel
     WarningLabel = ttk.Label(Frame, text="", font= 12)
             
-

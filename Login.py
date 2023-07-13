@@ -3,11 +3,6 @@ from tkinter import ttk
 from WindowChange import ChangeWindows
 from Warning import AddWarning
 
-root = tk.Tk(className=" Login Window ")   # Root Window
-root.geometry("500x500")                      
-
-MainFrame = tk.Frame(root)
-MainFrame.place(relx = 0.5, rely = 0.5, anchor= tk.CENTER)
 
 def LoginToMain(Frame):
     ChangeWindows(Frame, "Main")
