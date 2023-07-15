@@ -1,3 +1,3 @@
-zfile = open("test.txt", "r")
-
-file.write(str({'Remember': False, 'UserName': '', 'Email': '', 'Password': ''}))
+with open('../text.text', 'r') as file:
+    Lines = file.readlines()
+    

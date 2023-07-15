@@ -1,6 +1,6 @@
 import tkinter as tk
-
-from Register import RegisterSection
+from Windows.Register import RegisterSection
+#from Windows.Login import LoginSection
 
 try:
     File = open(r'account.txt', 'r')
@@ -15,7 +15,7 @@ File = open(r'account.txt', 'r')
 Account = File.readline(-1)
 Account = eval(Account)
 
-if Account["Remember"] == True:
+if Account["Remember"]:
     #go to main page as the account saved
     pass
 else:
@@ -23,14 +23,14 @@ else:
     #go to register or login
 
 root = tk.Tk(className=" Register Window ")   # Root Window
-root.geometry("500x500")                      
+root.geometry("500x500")
 
 MainFrame = tk.Frame(root)
-MainFrame.place(relx = 0.5, rely = 0.5, anchor= tk.CENTER)
+MainFrame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
 
 if __name__ == "__main__":
-    RegisterSection(MainFrame)
+    RegisterSection(root, MainFrame)
     root.mainloop()
 
 
