@@ -7,6 +7,8 @@ PasswordInput = None
 Register = None
 ChangeToLogIn = None
 WarningLabel = None
+
+
 def LoginSection(Frame):
     TitleLabel = ttk.Label(Frame, text = "Login Window", font=25)  # Title
     TitleLabel.grid(row=0, columnspan=2)
@@ -33,3 +35,7 @@ def LoginSection(Frame):
 
     global WarningLabel
     WarningLabel = ttk.Label(Frame, text="", font= 12)
+
+
+if __name__ == "__main__":
+    LoginSection()

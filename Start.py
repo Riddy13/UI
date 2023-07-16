@@ -1,15 +1,14 @@
 import tkinter as tk
 from Windows.Register import RegisterSection
-#from Windows.Login import LoginSection
+from Windows.Login import LoginSection
 
 try:
-    File = open(r'account.txt', 'r')
-    File.close()
+    with open("romeo.txt", "r") as file:
+        pass
 except:
-    File = open(r'account.txt', 'w')
-    RememberAcc = {'Remember': False, 'UserName': '', 'Email': '', 'Password': ''}
-    File.write(str(RememberAcc))
-    File.close()
+    with open(r'account.txt', 'w') as File:
+        RememberAcc = {'Remember': False, 'UserName': '', 'Email': '', 'Password': ''}
+        File.write(str(RememberAcc))
 
 File = open(r'account.txt', 'r')
 Account = File.readline(-1)
@@ -20,7 +19,7 @@ if Account["Remember"]:
     pass
 else:
     pass
-    #go to register or login
+    # go to register or login
 
 root = tk.Tk(className=" Register Window ")   # Root Window
 root.geometry("500x500")
@@ -30,7 +29,7 @@ MainFrame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
 
 if __name__ == "__main__":
-    RegisterSection(root, MainFrame)
+    RegisterSection(MainFrame)
     root.mainloop()
 
 

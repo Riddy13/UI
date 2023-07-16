@@ -8,51 +8,36 @@ Saves the checks and the Credentials. Use the SaveCredentials(Credentials) to sa
 
 """
 
-import re # More string functions
+import re  # More string functions
 
-def ValidInfo(Credentials): # Validating info (parameters and not already existing)
+
+def ValidInfo(Credentials):  # Validating info (parameters and not already existing)
     print("Validating info")
     RejectInputs = re.compile("[@_!#$%^&*()<>?/\|}{~:]")
 
-    # Username(>4 characters / Special Characters / Empty)
-    print("Checking username")
-    if RejectInputs.search(Credentials["UserName"]) or not "" in str(Credentials["UserName"]): #special characters and emtpy field
-        print("Calling warning")
+    # Username  (>4 characters / Special Characters / Empty)
+    if RejectInputs.search(Credentials["UserName"]) or "" not in str(Credentials["UserName"]):
         return "Invalid username, don't use special characters"
-
     elif len(str(Credentials["UserName"])) < 4:  # 4 Minimum characters
-        print("Calling warning")
         return "Username needs to be at least 4 characters"
     elif Credentials["UserName"] == "Admin":  # Checks for admin
         return True
 
-    print("Checking email")
-    # Email(>3 characters / needs '@'and dot / Empty)
+    # Email  (>3 characters / needs '@'and dot / Empty)
     if "@" not in Credentials["Email"] or "" not in Credentials["Email"] or "." not in Credentials["Email"]:
-        print("Calling warning")
         return "Invalid Email"
     elif len(str(Credentials["Email"])) < 3:
-        print("Calling warning")
         return "Email needs to have at least 3 characters"
 
-
-# ##########################
-# # ///////////////////////  <------ NEEDS WORK
-#     #Password(>4 characters / )
-#     #if RejectInputs.search(Credentials["Password"]) or "" in str(Credentials["UserName"]): #special characters and emtpy field
-#     #    Warning("Invalid username, don't use special characters") # Email
-#     #    ValidCred = False
-#     #    return
-#     #elif len(str(Credentials["UserName"])) < 4: # 4 Minimum characters
-#     #   Warning("Username needs to be at least 4 characters")
-#     #    ValidCred = False
-#     #    return
-# # ///////////////////////  <------ NEEDS WORK
-# ##########################
+    # Password  (>4 characters / not empty )
+    if RejectInputs.search(Credentials["Password"]) is None or "" in str(Credentials["Password"]):
+        return "Invalid password, use at least one special character"
+    elif len(str(Credentials["UserName"])) < 4:  # 4 Minimum characters
+        return "Username needs to be at least 4 characters"
 
     # Check for existing credentials
     File = open(r'Credentials.txt', 'r')
-    if File.read(): # If it has content
+    if File.read():  # If it has content
         File.seek(0)
         Lines = File.readlines()
         for line in Lines:
@@ -60,14 +45,13 @@ def ValidInfo(Credentials): # Validating info (parameters and not already existi
             DataBase = eval(line)
             if DataBase["UserName"] == Credentials["UserName"]:
                 print("Calling warning")
-                return("Username already being used")
+                return "Username already being used"
             if DataBase["Email"] == Credentials["Email"]:
                 print("Calling warning")
                 return "Email already being used"  # Change this if more checks are done
             return True
     else:
         return "File not found"
-
 
 
 def SaveCredentials(Credentials):
