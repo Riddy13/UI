@@ -1,7 +1,11 @@
 from Main import MainSection
 
 
-def GoToMain(Frame):
-    for widget in Frame.winfo_children():
+def ClearFrame(frame):
+    for widget in frame.winfo_children():
         widget.destroy()
-    MainSection(Frame)
+
+
+def ToMain(frame):
+    ClearFrame(frame)
+    MainSection(frame)
