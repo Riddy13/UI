@@ -2,11 +2,13 @@ import tkinter as tk
 from Windows.Register import RegisterSection
 from Windows.Login import LoginSection
 from Windows.Main import MainSection
+from UsersInfo.Credentials import EnterCredentials
 
 root = tk.Tk(className=" Register Window ")   # Root Window
 root.geometry("1500x850")
 MainFrame = tk.Frame(root)
 MainFrame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+RememberAcc = None
 
 try:
     with open("account.txt", "r") as file:
@@ -18,8 +20,9 @@ except:
 
 with open(r'account.txt', 'r') as File:
     Account = eval(File.readline(-1))
+    Check = EnterCredentials(Account)
 
-if Account["Remember"] == True:
+if Account["Remember"] and Check:
     MainSection(MainFrame)
 elif Account["Remember"] == False:
     LoginSection(MainFrame)

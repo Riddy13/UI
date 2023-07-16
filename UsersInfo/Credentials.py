@@ -36,22 +36,22 @@ def ValidInfo(Credentials):  # Validating info (parameters and not already exist
         return "Username needs to be at least 4 characters"
 
     # Check for existing credentials
-    File = open(r'Credentials.txt', 'r')
-    if File.read():  # If it has content
-        File.seek(0)
-        Lines = File.readlines()
-        for line in Lines:
-            # Turns the string into Dictionary, so it can be used to check
-            DataBase = eval(line)
-            if DataBase["UserName"] == Credentials["UserName"]:
-                print("Calling warning")
-                return "Username already being used"
-            if DataBase["Email"] == Credentials["Email"]:
-                print("Calling warning")
-                return "Email already being used"  # Change this if more checks are done
-            return True
-    else:
-        return "File not found"
+    with open(r'Credentials.txt', 'r') as File:
+        if File.read():  # If it has content
+            File.seek(0)
+            Lines = File.readlines()
+            for line in Lines:
+                # Turns the string into Dictionary, so it can be used to check
+                DataBase = eval(line)
+                if DataBase["UserName"] == Credentials["UserName"]:
+                    print("Calling warning")
+                    return "Username already being used"
+                if DataBase["Email"] == Credentials["Email"]:
+                    print("Calling warning")
+                    return "Email already being used"  # Change this if more checks are done
+                return True
+        else:
+            return "File not found"
 
 
 def SaveCredentials(Credentials):
@@ -76,3 +76,20 @@ def SaveCredentials(Credentials):
         return True  # Returns True to go to main
     elif isinstance(Info, str):
         return Info  # Returns Warning
+
+
+def EnterCredentials(Credentials):
+    with open(r'Credentials.txt', 'r') as File:
+        if File.read():  # If it has content
+            File.seek(0)
+            Lines = File.readlines()
+            for line in Lines:
+                # Turns the string into Dictionary, so it can be used to check
+                DataBase = eval(line)
+                if DataBase["UserName"] != Credentials["UserName"] or DataBase["Email"] != Credentials["Email"]:
+                    return "Username/Email not found"
+                if DataBase["Password"] != Credentials["Password"]:
+                    return "Password not correct"
+                return True
+        else:
+            return "File not found"

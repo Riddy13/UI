@@ -1,6 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
-from Windows.GoToMain import *
+from Windows.GoToMain import ToMain
+from UsersInfo.Credentials import EnterCredentials
+from Misc.Warning import AddWarning
+
+
+def PreparingToMain(Frame):  # Checks and then saves the credentials
+    Credentials = {"UserName": UserAndEmailNameInput.get(), "Email": PasswordInput.get()}
+    Check = EnterCredentials(Credentials)
+    if Check:
+        ToMain(Frame)
+    # The function below needs the error name, the warning widget label, and the widgets buttons
+    elif isinstance(Check, str):
+        AddWarning(Check, WarningLabel, ChangeToRegister, Login)
+
 
 def LoginSection(Frame):
     TitleLabel = ttk.Label(Frame, text="Login Window", font=25)  # Title

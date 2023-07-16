@@ -1,8 +1,7 @@
 import tkinter as tk
 
 
-def AddWarning(WarningType, WarningLabel, Register,
-               ChangeToLogIn):  # Change the button's grid placement for text with warning
+def AddWarning(WarningType, WarningLabel, Register, ChangeToLogIn):  # Change the button's grid placement for text with warning
     print("Calling Warning with error: " + str(WarningType))
     WarningLabel.configure(text=str(WarningType))
     WarningLabel.grid(row=4, columnspan=2, sticky=tk.N)

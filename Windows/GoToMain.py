@@ -1,4 +1,4 @@
-from Main import MainSection
+from Windows.Main import MainSection
 
 
 def ClearFrame(frame):
