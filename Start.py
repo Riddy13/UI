@@ -1,5 +1,4 @@
 import tkinter as tk
-from Windows.Register import RegisterSection
 from Windows.Login import LoginSection
 from Windows.Main import MainSection
 from UsersInfo.Credentials import EnterCredentials

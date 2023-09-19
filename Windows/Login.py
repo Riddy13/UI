@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from Windows.GoToMain import ToMain
+from Windows.loginToW import ToMain
 from UsersInfo.Credentials import EnterCredentials
 from Misc.Warning import AddWarning
 

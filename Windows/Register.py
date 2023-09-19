@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from UsersInfo.Credentials import SaveCredentials
 from Misc.Warning import AddWarning
-from Windows.GoToMain import ToMain
+#from Windows.GoToMain import ToMain
 
 
 def PreparingToMain(Frame):  # Checks and then saves the credentials
