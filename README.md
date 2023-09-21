@@ -1,5 +1,5 @@
 # UI
-Interface com monte de merda
+Interface com várias coisas.
 
 Interface com registro e login
 
